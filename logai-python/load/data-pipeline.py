@@ -107,7 +107,7 @@ def ingest_devguide():
   print(f'  Total Time = {end-start}', f'Total Documents = {len(documents)}', f'Total Nodes = {len(nodes)}')
 
 ingest_logs()
-ingest_gitrepo()
-ingest_devguide()
+#ingest_gitrepo()
+#ingest_devguide()
 
 print('Manually create atlas vector search index:','logs_idx','code_idx','devguide_idx')

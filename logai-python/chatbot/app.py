@@ -5,16 +5,21 @@ import fusion_retriever
 from llama_index.core.llms import ChatMessage,MessageRole
 
 def get_stream_response(query_string,radio,model):
-  chat_message = [ ChatMessage(role=MessageRole.USER,content=query_string) ]
+  #chat_message = [ ChatMessage(role=MessageRole.USER,content=query_string) ]
+  chat_message = [
+              ChatMessage(role=MessageRole.USER,content=query_string),
+              ]
+
+  message_str = ' '.join(msg.content for msg in chat_message)
 
   if radio == 'logs':
-     return single_retriever.get_chat_engine('logs_collection','logs_idx',model).stream_chat(chat_message)
+     return single_retriever.get_chat_engine('logs_collection','logs_idx',model).stream_chat(message_str)
   elif radio == 'code':
-     return single_retriever.get_chat_engine('code_collection','code_idx',model).stream_chat(chat_message)
+     return single_retriever.get_chat_engine('code_collection','code_idx',model).stream_chat(message_str)
   elif radio == 'devguide':
-     return single_retriever.get_chat_engine('devguide_collection','devguide_idx',model).stream_chat(chat_message)
+     return single_retriever.get_chat_engine('devguide_collection','devguide_idx',model).stream_chat(message_str)
   elif radio == 'all':
-     return fusion_retriever.get_chat_engine(model).stream_chat(chat_message)
+     return fusion_retriever.get_chat_engine(model).stream_chat(message_str)
   else:
      return single_retriever.default_llm(model).stream_chat(chat_message)
 

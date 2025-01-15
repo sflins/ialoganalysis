@@ -1,0 +1,5 @@
+# Python compiled files
+logai-python/chatbot/__pycache__
+
+# Virtual environment directories
+loganalysisenv
